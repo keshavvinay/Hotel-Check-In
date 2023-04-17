@@ -12,18 +12,16 @@ let rooms = [
   {
     roomNumber: "101",
     floor: "1",
-    occupants: ["John", "Jane"],
-    price: 100,
-    checkedIn: true,
-    numAdults: 2,
+    price: 0,
+    checkedIn: false,
+    numAdults: 0,
   },
   {
     roomNumber: "102",
     floor: "1",
-    occupants: [],
-    price: 80,
+    price: 0,
     checkedIn: false,
-    numAdults: 1,
+    numAdults: 0,
   },
   {
     roomNumber: "103",
@@ -37,66 +35,66 @@ let rooms = [
     roomNumber: "201",
     floor: "2",
     occupants: ["Bob"],
-    price: 120,
-    checkedIn: true,
-    numAdults: 2,
+    price: 0,
+    checkedIn: false,
+    numAdults: 0,
   },
   {
     roomNumber: "202",
     floor: "2",
     occupants: [],
-    price: 90,
+    price: 0,
     checkedIn: false,
-    numAdults: 1,
+    numAdults: 0,
   },
   {
     roomNumber: "301",
     floor: "3",
-    price: 150,
+    price: 0,
     checkedIn: false,
-    numAdults: 1,
+    numAdults: 0,
   },
   {
     roomNumber: "302",
     floor: "3",
-    price: 1500,
+    price: 0,
     checkedIn: false,
-    numAdults: 1,
+    numAdults: 0,
   },
   {
     roomNumber: "303",
     floor: "3",
-    price: 150,
+    price: 0,
     checkedIn: false,
-    numAdults: 1,
+    numAdults: 0,
   },
   {
     roomNumber: "304",
     floor: "3",
-    price: 150,
+    price: 0,
     checkedIn: false,
-    numAdults: 1,
+    numAdults: 0,
   },
   {
     roomNumber: "305",
     floor: "3",
-    price: 1500,
+    price: 0,
     checkedIn: false,
-    numAdults: 1,
+    numAdults: 0,
   },
   {
     roomNumber: "306",
     floor: "3",
-    price: 1500,
+    price: 0,
     checkedIn: false,
-    numAdults: 1,
+    numAdults: 0,
   },
   {
     roomNumber: "307",
     floor: "3",
-    price: 1500,
+    price: 0,
     checkedIn: false,
-    numAdults: 1,
+    numAdults: 0,
   },
   // Add more rooms as needed
 ];
@@ -107,7 +105,7 @@ function App() {
   const [roomDetails, setRoomDetails] = useState({
     checkedIn: false,
     price: 0,
-    numAdults: 1,
+    numAdults: 0,
   });
 
   const handleFloorChange = (event) => {
@@ -116,7 +114,6 @@ function App() {
   };
 
   const handleRoomClick = (room) => {
-    console.log(room);
     setSelectedRoom(room);
     setRoomDetails({
       checkedIn: room.checkedIn,
@@ -133,6 +130,27 @@ function App() {
     setRoomDetails({
       ...roomDetails,
       [event.target.name]: event.target.value,
+    });
+  };
+
+  const handleCheckOut = (event, room) => {
+    event.stopPropagation();
+    const emptyRoom = {
+      roomNumber: room.roomNumber,
+      floor: room.floor,
+      checkedIn: false,
+      price: 0,
+      numAdults: 0,
+    };
+    const updatedRooms = rooms.map((room) =>
+      room.roomNumber === emptyRoom.roomNumber ? emptyRoom : room
+    );
+    rooms = updatedRooms;
+    // setSelectedRoom(emptyRoom);
+    setRoomDetails({
+      checkedIn: emptyRoom.checkedIn,
+      price: emptyRoom.price,
+      numAdults: emptyRoom.numAdults,
     });
   };
 
@@ -156,6 +174,7 @@ function App() {
       numAdults: updatedRoom.numAdults,
     });
     rooms = updatedRooms;
+    handleModalClose();
   };
 
   const filteredRooms = rooms.filter((room) => room.floor === selectedFloor);
@@ -190,17 +209,33 @@ function App() {
                 }`}
                 onClick={() => handleRoomClick(room)}
               >
+                {room.checkedIn && (
+                  <>
+                    <span className="checked-in">Checked In</span>
+                  </>
+                )}
                 <h3>Room {room.roomNumber}</h3>
 
                 {room.checkedIn && (
                   <>
-                    <div className="room-info">
+                    <button
+                      className="check-out"
+                      onClick={(event) => handleCheckOut(event, room)}
+                    >
+                      Check Out
+                    </button>
+                    {/* <div className="room-info">
                       <p>Price: ₹{room.price}</p>
                     </div>
                     <div>
                       <p className="checked-in">Checked In</p>
-                      <button className="check-out">Check Out</button>
-                    </div>
+                      <button
+                        className="check-out"
+                        onClick={(event) => handleCheckOut(event, room)}
+                      >
+                        Check Out
+                      </button>
+                    </div> */}
                   </>
                 )}
                 {/* <div className="occupants">

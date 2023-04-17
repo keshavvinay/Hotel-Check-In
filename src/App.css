@@ -53,8 +53,17 @@ select {
 }
 
 .room-card .checked-in {
-  color: #4caf50;
+  color: white;
+  border: 1px solid #4caf50;
+  background-color: #4caf50;
+  padding: 1px 3px;
 }
+/* .room-card h3:only-child {
+  display: flex;
+  align-items: center;
+  margin: auto 0;
+  height: 100%;
+} */
 
 .occupants {
   margin-top: 10px;
@@ -94,16 +103,18 @@ select {
 }
 
 form label {
-  display: block;
+  /* display: block; */
   margin-bottom: 10px;
 }
 
 form input[type="checkbox"] {
   margin-right: 10px;
+  margin-bottom: 10px;
 }
 
 form input[type="number"] {
   width: 50px;
+  margin-bottom: 3px;
   margin-right: 10px;
 }
 
