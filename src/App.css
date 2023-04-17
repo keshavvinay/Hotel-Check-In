@@ -17,6 +17,9 @@ select {
   padding: 8px;
   margin: 10px 0;
 }
+form select {
+  padding: 0px;
+}
 
 .room-list {
   display: flex;

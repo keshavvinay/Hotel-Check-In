@@ -53,6 +53,7 @@ let rooms = [
     price: 0,
     checkedIn: false,
     numAdults: 0,
+    payment: "",
   },
   {
     roomNumber: "302",
@@ -106,6 +107,7 @@ function App() {
     checkedIn: false,
     price: 0,
     numAdults: 0,
+    payment: "",
   });
 
   const handleFloorChange = (event) => {
@@ -119,6 +121,7 @@ function App() {
       checkedIn: room.checkedIn,
       price: room.price,
       numAdults: room.numAdults,
+      payment: room.payment,
     });
   };
 
@@ -127,10 +130,12 @@ function App() {
   };
 
   const handleRoomDetailsChange = (event) => {
+    console.log(event.target.value);
     setRoomDetails({
       ...roomDetails,
       [event.target.name]: event.target.value,
     });
+    // console.log(roomDetails);
   };
 
   const handleCheckOut = (event, room) => {
@@ -162,6 +167,7 @@ function App() {
       checkedIn: roomDetails.checkedIn,
       price: roomDetails.price,
       numAdults: roomDetails.numAdults,
+      payment: roomDetails.payment,
     };
 
     const updatedRooms = rooms.map((room) =>
@@ -174,6 +180,7 @@ function App() {
       numAdults: updatedRoom.numAdults,
     });
     rooms = updatedRooms;
+    console.log(rooms);
     handleModalClose();
   };
 
@@ -279,13 +286,38 @@ function App() {
               />
               <br />
               <label htmlFor="num-adults-input">Number of Adults:</label>
-              <input
+              {/* <input
                 id="num-adults-input"
                 type="number"
                 name="numAdults"
                 value={roomDetails.numAdults}
                 onChange={handleRoomDetailsChange}
-              />
+              /> */}
+              <select
+                id="num-adults-input"
+                name="numAdults"
+                value={roomDetails.numAdults}
+                onChange={handleRoomDetailsChange}
+              >
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="2">3</option>
+                <option value="2">4</option>
+                <option value="2">5</option>
+              </select>
+              <br />
+              <label htmlFor="payment-type">Payment type : </label>
+              <select
+                id="payment-type"
+                name="payment"
+                value={roomDetails.payment}
+                onChange={handleRoomDetailsChange}
+              >
+                <option value="">-- choose --</option>
+                <option value="online">Online</option>
+                <option value="cash">Cash</option>
+              </select>
               <br />
               <button type="submit">Save</button>
             </form>
