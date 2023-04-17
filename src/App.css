@@ -37,6 +37,9 @@ form select {
   padding: 10px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
+  min-height: 123px;
+  display: grid;
+  place-items: center;
 }
 
 .room-card:hover {
@@ -62,9 +65,9 @@ form select {
   padding: 1px 3px;
 }
 /* .room-card h3:only-child {
-  display: flex;
-  align-items: center;
-  margin: auto 0;
+  display: grid;
+  place-items: center;
+  margin: 0;
   height: 100%;
 } */
 
