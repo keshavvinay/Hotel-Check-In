@@ -185,6 +185,7 @@ function App() {
   };
 
   const filteredRooms = rooms.filter((room) => room.floor === selectedFloor);
+  console.log(filteredRooms);
 
   return (
     <div className="App">
@@ -302,9 +303,9 @@ function App() {
                 <option value="0">0</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
-                <option value="2">3</option>
-                <option value="2">4</option>
-                <option value="2">5</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
               </select>
               <br />
               <label htmlFor="payment-type">Payment type : </label>
